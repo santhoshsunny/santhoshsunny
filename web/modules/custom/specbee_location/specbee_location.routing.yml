@@ -1,0 +1,7 @@
+specbee_location.adminsettings:
+  path: 'admin/config/specbee_location/settings'
+  defaults:
+    _title: 'Settings form'
+    _form: '\Drupal\specbee_location\Form\LocationsSettingsForm'
+  requirements:
+    _permission: 'access content'

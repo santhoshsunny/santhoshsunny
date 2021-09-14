@@ -1,0 +1,6 @@
+name: "specbee_location"
+type: module
+description: "Site location and the current time for the location"
+core: 8.x
+package: "Custom"
+core_version_requirement: ^8 || ^9

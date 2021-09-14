@@ -1,0 +1,4 @@
+"administer custom":
+  "title": "Administer Customform"
+  "description": "Configure how Custom Form is used on the site."
+  restrict access: true

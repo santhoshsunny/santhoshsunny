@@ -1,0 +1,4 @@
+services:
+  specbee_location.custom_services:
+    class: Drupal\specbee_location\Services\CustomService
+    arguments: ["@config.factory"]
