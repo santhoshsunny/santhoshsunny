@@ -4,6 +4,7 @@ namespace Drupal\specbee_location\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Cache\Cache;
 
 /**
  * List tests arranged in groups that can be selected and run.
@@ -121,14 +122,17 @@ class LocationsSettingsForm extends ConfigFormBase {
    *   The current state of the form.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-
+    //$tags=[];
     parent::submitForm($form, $form_state);
     $this->config('specbee_location.adminsettings')
       ->set('country', $form_state->getValue('country'))
       ->set('city', $form_state->getValue('city'))
       ->set('timezone_dropdown', $form_state->getValue('timezone_dropdown'))
       ->save(); //saving the configuration value in database
-
+      // $tags[] = 'my_timezone';
+      // if (!empty($tags)) {
+      //   Cache::invalidateTags($tags);
+      // }
     // Call the Static Service Container wrapper
     // We should inject the messenger service, but its beyond the scope of this example.
     $messenger = \Drupal::messenger();

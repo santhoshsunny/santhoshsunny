@@ -5,3 +5,9 @@ specbee_location.adminsettings:
     _form: '\Drupal\specbee_location\Form\LocationsSettingsForm'
   requirements:
     _permission: 'access content'
+specbee_location.adminjax:
+  path: 'get-timezone'
+  defaults:
+    _controller: '\Drupal\specbee_location\Controller\TimezoneController::get_timezone'
+  requirements:
+    _access: 'TRUE'

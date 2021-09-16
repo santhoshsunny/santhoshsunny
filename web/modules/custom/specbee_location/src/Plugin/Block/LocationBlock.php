@@ -3,11 +3,11 @@
 namespace Drupal\specbee_location\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\specbee_location\Services\CustomService;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+
 
 /**
  * Provides 'location block'.
@@ -61,35 +61,22 @@ class LocationBlock extends Blockbase implements ContainerFactoryPluginInterface
   public function build() {
     $country = $this->configFactory->get('specbee_location.adminsettings')->get('country');
     $city = $this->configFactory->get('specbee_location.adminsettings')->get('city');
-    $timezone = $this->configFactory->get('specbee_location.adminsettings')->get('timezone_dropdown');
-    if (!empty($country) && !empty($city) && !empty($timezone)) {
+    if (!empty($country) && !empty($city)) {
       $location = [
         'country' => ucwords(strtolower($country)),
         'city' => ucwords(strtolower($city)),
-        'timezone' => $this->location->get_time(),
       ];
     }
-
     $renderable = [
       '#theme' => 'location_block',
       '#location' => $location,
-      '#cache' => [
-        'max-age' => 0,
+      '#attached' => [
+        'library' => [
+          'specbee_location/specbee_location_timezone',
+        ],
       ],
     ];
     return $renderable;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function blockValidate($form, FormStateInterface $form_state) {}
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCacheMaxAge() {
-    return 0;
   }
 
 }
